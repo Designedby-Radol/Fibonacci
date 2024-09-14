@@ -1,44 +1,19 @@
-# generar fibonacci
-# def fibonacci_gen(num):
-#     fn = [0, 1]
-#     while fn[-1] <= num:
-#         fn.append(fn[-1] + fn[-2])
-#     if fn[-1] > num:
-#         fn.pop()
-#     # for valor in fn:
-#     #     print(valor)
-#     return fn
+from manim import *
 
-# # Ejemplo de uso:
-# numlimit = int(input("ingrese el numero al que quiera ir hasta foibonacci: "))  # Puedes cambiar este valor según desees
-# fib = fibonacci_gen(numlimit) #
-# print(f"Secuencia de Fibonacci hasta el número {numlimit}:")
-# print(fib)
+class AutoArrangeSquares(Scene):
+    def construct(self):
+        # Llama a la función para crear y organizar cuadros
+        self.arrange_squares(5, side_length=1, gap=0.5)
+    
+    def arrange_squares(self, num_squares, side_length=1, gap=0.5):
+        squares = VGroup()  # Agrupa todos los cuadros
 
-
-class Persona:
-    def __init__(self, nombre, edad):
-        self.nombre = nombre
-        self.edad = edad
-    def saludar(self):
-        print(f"Hola, mi nombre es {self.nombre} y tengo {self.edad} años.")
-
-persona1 = Persona("Ana", 30)
-persona1.saludar()  # Salida: Hola, mi nombre es Ana y tengo 30 años.
-
-def saludar(nombre):
-    print(f"Hola, {nombre}!")
-
-saludar("Carlos")  # Salida: Hola, Carlos!
-
-class Animal:
-    def __init__(self, nombre, especie):
-        self.nombre = nombre
-        self.especie = especie
-
-    def hacer_sonido(self):
-        print(f"{self.nombre} hace un sonido.")
-
-perro = Animal("Fido", "Perro")
-perro.hacer_sonido()  # Salida: Fido hace un sonido.
-
+        for i in range(num_squares):
+            square = Square(side_length=side_length)
+            # Coloca el cuadro en su posición adecuada
+            square.shift(RIGHT * (side_length + gap) * i)
+            squares.add(square)
+        
+        # Añade todos los cuadros a la escena
+        self.play(Create(squares))
+        self.wait(2)
